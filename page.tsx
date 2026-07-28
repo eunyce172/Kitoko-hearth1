@@ -1,42 +1,44 @@
 import type { Metadata } from 'next';
 import PageHero from '@/components/ui/PageHero';
-import TeamCard from '@/components/team/TeamCard';
-import { team } from '@/lib/data';
-import { Info } from 'lucide-react';
+import TestimonialCard from '@/components/testimonials/TestimonialCard';
+import Button from '@/components/ui/Button';
+import Reveal from '@/components/ui/Reveal';
+import { testimonials } from '@/lib/data';
 
 export const metadata: Metadata = {
-  title: 'Meet Our Team',
-  description: 'The mentors and staff behind Kitoko Hearth\u2019s technology programmes for teenagers.',
+  title: 'Testimonials',
+  description: 'What students, parents, and alumni say about their experience with Kitoko Hearth programmes.',
 };
 
-export default function TeamPage() {
+export default function TestimonialsPage() {
   return (
     <>
       <PageHero
-        eyebrow="Meet Our Team"
-        title="The people behind the hearth"
-        description="Mentors, staff, and volunteers who show up every week to teach, guide, and build alongside our students."
+        eyebrow="Testimonials"
+        title="Stories from our community"
+        description="Illustrative placeholder stories today — real student and parent voices will replace these as they come in."
       />
 
-      <section className="pb-4">
-        <div className="max-w-4xl mx-auto px-6">
-          <div className="flex items-start gap-3 text-sm text-charcoal/60 dark:text-cream/60 bg-gold/10 border border-gold/20 rounded-xl px-5 py-4">
-            <Info className="w-[18px] h-[18px] text-gold shrink-0 mt-0.5" aria-hidden="true" />
-            <p>
-              The profiles below are clearly labelled placeholders. Real team names, roles, photos, and bios will
-              replace them once provided.
-            </p>
+      <section className="py-16 md:py-20 bg-cream dark:bg-brown-deep">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {testimonials.map((t, i) => (
+              <TestimonialCard key={t.id} testimonial={t} delay={i * 0.06} />
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="py-16 md:py-20 bg-cream dark:bg-brown-deep">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {team.map((member, i) => (
-              <TeamCard key={member.id} member={member} delay={i * 0.06} />
-            ))}
-          </div>
+      <section className="py-20 bg-hearth-gradient">
+        <div className="max-w-xl mx-auto px-6 text-center">
+          <Reveal>
+            <h2 className="font-display font-bold text-2xl md:text-3xl text-cream mb-4">
+              Ready to write your own story?
+            </h2>
+            <Button href="/join" size="lg" icon className="bg-none bg-cream text-brown-deep shadow-none hover:shadow-glow">
+              Join Kitoko Hearth
+            </Button>
+          </Reveal>
         </div>
       </section>
     </>
