@@ -1,124 +1,79 @@
 import type { Metadata } from 'next';
+import { Mail, Phone, MapPin, Linkedin, Twitter, Instagram, Facebook } from 'lucide-react';
 import PageHero from '@/components/ui/PageHero';
+import ContactForm from '@/components/contact/ContactForm';
 import Reveal from '@/components/ui/Reveal';
-import { coreValues, storyMilestones } from '@/lib/data';
-import { iconMap } from '@/lib/icon-map';
-import { Sparkles } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'About Us',
-  description: 'The story, vision, mission, and values behind Kitoko Hearth — why we exist and who we serve.',
+  title: 'Contact',
+  description: 'Get in touch with Kitoko Hearth — email, phone, office location, and social channels.',
 };
 
-export default function AboutPage() {
+const socials = [
+  { href: 'https://linkedin.com', label: 'LinkedIn', icon: Linkedin },
+  { href: 'https://x.com', label: 'X (Twitter)', icon: Twitter },
+  { href: 'https://instagram.com', label: 'Instagram', icon: Instagram },
+  { href: 'https://facebook.com', label: 'Facebook', icon: Facebook },
+];
+
+export default function ContactPage() {
   return (
     <>
       <PageHero
-        eyebrow="About Kitoko Hearth"
-        title="A hearth is where things are built, together."
-        description="We exist because too many teenagers with real technical curiosity never get a real project to point it at."
+        eyebrow="Contact"
+        title="We'd love to hear from you"
+        description="Questions about programmes, partnerships, or volunteering as a mentor — reach out any time."
       />
 
-      {/* Vision & Mission */}
-      <section className="py-20 md:py-28 bg-white dark:bg-brown">
-        <div className="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-10">
-          <Reveal>
-            <div className="p-8 rounded-2xl bg-cream dark:bg-brown-deep shadow-soft h-full">
-              <h2 className="font-display font-bold text-2xl text-brown dark:text-cream mb-3">Our Vision</h2>
-              <p className="text-charcoal/70 dark:text-cream/70 leading-relaxed">
-                A generation of young people who see themselves as builders of technology, not just users of it —
-                equipped, mentored, and given the room to create.
-              </p>
+      <section className="py-16 md:py-20 bg-cream dark:bg-brown-deep">
+        <div className="max-w-6xl mx-auto px-6 grid lg:grid-cols-5 gap-10">
+          <Reveal className="lg:col-span-3">
+            <div className="p-8 md:p-10 rounded-3xl bg-white dark:bg-brown shadow-soft">
+              <ContactForm />
             </div>
           </Reveal>
-          <Reveal delay={0.08}>
-            <div className="p-8 rounded-2xl bg-cream dark:bg-brown-deep shadow-soft h-full">
-              <h2 className="font-display font-bold text-2xl text-brown dark:text-cream mb-3">Our Mission</h2>
-              <p className="text-charcoal/70 dark:text-cream/70 leading-relaxed">
-                To give teenagers hands-on, project-based technology education — led by real mentors, measured by
-                things actually shipped, not just lessons completed.
-              </p>
+
+          <Reveal delay={0.1} className="lg:col-span-2 flex flex-col gap-6">
+            <div className="p-8 rounded-3xl bg-white dark:bg-brown shadow-soft space-y-5">
+              <h2 className="font-display font-semibold text-lg text-brown dark:text-cream">Get in touch</h2>
+              <a href="mailto:hello@kitokohearth.org" className="flex items-start gap-3 text-sm text-charcoal/75 dark:text-cream/75 hover:text-gold transition-colors">
+                <Mail className="w-[18px] h-[18px] mt-0.5 shrink-0" aria-hidden="true" />
+                hello@kitokohearth.org
+              </a>
+              <a href="tel:+10000000000" className="flex items-start gap-3 text-sm text-charcoal/75 dark:text-cream/75 hover:text-gold transition-colors">
+                <Phone className="w-[18px] h-[18px] mt-0.5 shrink-0" aria-hidden="true" />
+                +1 (000) 000-0000
+              </a>
+              <div className="flex items-start gap-3 text-sm text-charcoal/75 dark:text-cream/75">
+                <MapPin className="w-[18px] h-[18px] mt-0.5 shrink-0" aria-hidden="true" />
+                <span>123 Innovation Way, Your City<br />(placeholder — update with real office address)</span>
+              </div>
+              <div className="flex items-center gap-2 pt-2">
+                {socials.map(({ href, label, icon: Icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="w-9 h-9 flex items-center justify-center rounded-full border border-brown/15 dark:border-cream/15 hover:border-gold hover:text-gold transition-colors"
+                  >
+                    <Icon className="w-4 h-4" aria-hidden="true" />
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-3xl overflow-hidden shadow-soft flex-1 min-h-[240px]">
+              <iframe
+                title="Kitoko Hearth office location (placeholder)"
+                src="https://www.google.com/maps?q=Innovation+Way&output=embed"
+                className="w-full h-full min-h-[240px] border-0"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </div>
           </Reveal>
-        </div>
-      </section>
-
-      {/* Why we exist */}
-      <section className="py-20 md:py-28 bg-cream dark:bg-brown-deep">
-        <div className="max-w-3xl mx-auto px-6 text-center">
-          <Reveal>
-            <Sparkles className="w-8 h-8 text-gold mx-auto mb-6" aria-hidden="true" />
-            <h2 className="font-display font-bold text-3xl md:text-4xl text-brown dark:text-cream mb-5 text-balance">
-              Why Kitoko Hearth exists
-            </h2>
-            <p className="text-charcoal/70 dark:text-cream/70 leading-relaxed text-lg">
-              Most teenagers who are curious about technology hit the same wall: tutorials with no mentor, ambition
-              with no project, and talent with no path. Kitoko Hearth closes that gap — pairing every teen with a
-              mentor and a real problem worth solving, so curiosity becomes a portfolio, not just a phase.
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Story timeline - sequential, so numbered/ordered markers are appropriate here */}
-      <section className="py-20 md:py-28 bg-white dark:bg-brown">
-        <div className="max-w-3xl mx-auto px-6">
-          <Reveal className="text-center mb-16">
-            <p className="font-display text-sm font-semibold uppercase tracking-wider text-gold mb-3">Our Story</p>
-            <h2 className="font-display font-bold text-3xl md:text-4xl text-brown dark:text-cream">
-              How the hearth was built
-            </h2>
-          </Reveal>
-
-          <ol className="relative border-l-2 border-gold/30 ml-3">
-            {storyMilestones.map((milestone, i) => (
-              <Reveal key={milestone.year} delay={i * 0.06} className="mb-10 last:mb-0">
-                <li className="pl-8 relative">
-                  <span className="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-gold-gradient ring-4 ring-white dark:ring-brown" aria-hidden="true" />
-                  <p className="font-display font-bold text-gold text-sm mb-1">{milestone.year}</p>
-                  <h3 className="font-display font-semibold text-lg text-brown dark:text-cream mb-1">
-                    {milestone.title}
-                  </h3>
-                  <p className="text-sm text-charcoal/65 dark:text-cream/65 leading-relaxed">
-                    {milestone.description}
-                  </p>
-                </li>
-              </Reveal>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      {/* Core values */}
-      <section className="py-20 md:py-28 bg-cream dark:bg-brown-deep">
-        <div className="max-w-6xl mx-auto px-6">
-          <Reveal className="text-center max-w-2xl mx-auto mb-14">
-            <p className="font-display text-sm font-semibold uppercase tracking-wider text-gold mb-3">Core Values</p>
-            <h2 className="font-display font-bold text-3xl md:text-4xl text-brown dark:text-cream">
-              What guides how we teach
-            </h2>
-          </Reveal>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {coreValues.map((value, i) => {
-              const Icon = iconMap[value.icon] ?? Sparkles;
-              return (
-                <Reveal key={value.title} delay={i * 0.06}>
-                  <div className="p-7 rounded-2xl bg-white dark:bg-brown shadow-soft h-full">
-                    <span className="flex items-center justify-center w-11 h-11 rounded-xl bg-gold-gradient mb-4">
-                      <Icon className="w-5 h-5 text-brown-deep" aria-hidden="true" />
-                    </span>
-                    <h3 className="font-display font-semibold text-lg text-brown dark:text-cream mb-2">
-                      {value.title}
-                    </h3>
-                    <p className="text-sm text-charcoal/65 dark:text-cream/65 leading-relaxed">
-                      {value.description}
-                    </p>
-                  </div>
-                </Reveal>
-              );
-            })}
-          </div>
         </div>
       </section>
     </>
