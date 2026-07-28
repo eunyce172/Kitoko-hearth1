@@ -1,12 +1,9 @@
 import Link from 'next/link';
-import { Code2, Smartphone, Palette, Bot, BrainCircuit, Rocket, Users, ArrowRight, type LucideIcon } from 'lucide-react';
+import { ArrowRight, Code2 } from 'lucide-react';
 import { programmes } from '@/lib/data';
+import { iconMap } from '@/lib/icon-map';
 import Reveal from '@/components/ui/Reveal';
 import Button from '@/components/ui/Button';
-
-const iconMap: Record<string, LucideIcon> = {
-  Code2, Smartphone, Palette, Bot, BrainCircuit, Rocket, Users,
-};
 
 export default function Programmes() {
   const featured = programmes.slice(0, 6);
@@ -34,7 +31,7 @@ export default function Programmes() {
                   className="group block h-full p-7 rounded-2xl bg-white dark:bg-brown border border-brown/5 dark:border-cream/5 shadow-soft hover:shadow-lift hover:-translate-y-1 transition-all duration-300"
                 >
                   <span className="flex items-center justify-center w-12 h-12 rounded-xl bg-gold-gradient mb-5 group-hover:scale-105 transition-transform">
-                    <Icon className="w-5.5 h-5.5 text-brown-deep" aria-hidden="true" />
+                    <Icon className="w-[22px] h-[22px] text-brown-deep" aria-hidden="true" />
                   </span>
                   <h3 className="font-display font-semibold text-lg text-brown dark:text-cream mb-2">
                     {programme.title}
