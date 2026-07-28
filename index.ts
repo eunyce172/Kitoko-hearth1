@@ -49,3 +49,15 @@ export interface FaqItem {
   question: string;
   answer: string;
 }
+
+export interface CoreValue {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+export interface StoryMilestone {
+  year: string;
+  title: string;
+  description: string;
+}
