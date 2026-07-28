@@ -1,4 +1,4 @@
-import { Programme, Testimonial, TeamMember, StudentProject, Stat, FaqItem } from '@/types';
+import { Programme, Testimonial, TeamMember, StudentProject, Stat, FaqItem, CoreValue, StoryMilestone } from '@/types';
 
 export const programmes: Programme[] = [
   {
@@ -210,5 +210,61 @@ export const faqs: FaqItem[] = [
   {
     question: 'How do parents stay involved?',
     answer: 'Parents receive progress updates and are invited to our showcase events at the end of each cohort.',
+  },
+];
+
+export const coreValues: CoreValue[] = [
+  {
+    title: 'Curiosity First',
+    description: 'We meet every question with respect — curiosity is the raw material every builder starts with.',
+    icon: 'Sparkles',
+  },
+  {
+    title: 'Build, Don\u2019t Just Learn',
+    description: 'Every concept is paired with a real project. Understanding sticks when hands are on the keyboard.',
+    icon: 'Hammer',
+  },
+  {
+    title: 'Mentorship Over Instruction',
+    description: 'We pair teens with mentors who guide, not lecture — learning through relationship, not just content.',
+    icon: 'Users',
+  },
+  {
+    title: 'Excellence Is Accessible',
+    description: 'Great tools and great teaching should not depend on zip code. We remove cost and access barriers.',
+    icon: 'Gem',
+  },
+  {
+    title: 'Hope as a Discipline',
+    description: 'We treat hope as something built through small, repeated wins, not a feeling to wait for.',
+    icon: 'Flame',
+  },
+];
+
+export const storyMilestones: StoryMilestone[] = [
+  {
+    year: '2021',
+    title: 'The first spark',
+    description: 'Kitoko Hearth began as a weekend coding circle for a handful of teenagers meeting in a community room.',
+  },
+  {
+    year: '2022',
+    title: 'First cohort, first mentors',
+    description: 'We formalised our first structured programme and welcomed our first volunteer mentors.',
+  },
+  {
+    year: '2023',
+    title: 'Beyond web development',
+    description: 'Robotics, UI/UX, and AI & Machine Learning joined the programme catalogue as demand grew.',
+  },
+  {
+    year: '2024',
+    title: 'Partner schools',
+    description: 'We began partnering directly with schools to bring project-based tech learning into classrooms.',
+  },
+  {
+    year: 'Today',
+    title: 'A growing hearth',
+    description: 'Hundreds of teens and dozens of mentors later, we\u2019re still building around the same idea: a spark, given the right conditions, grows.',
   },
 ];
