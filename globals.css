@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-heading: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  @apply bg-cream text-charcoal dark:bg-brown-deep dark:text-cream font-body antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-display;
+}
+
+/* Visible keyboard focus ring everywhere */
+:focus-visible {
+  outline: 2px solid #D89A2B;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: #D89A2B;
+  color: #2E1509;
+}
+
+/* Signature "hearth glow" ambient backdrop */
+.hearth-glow-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 30%, rgba(216, 154, 43, 0.25), transparent 60%);
+  animation: hearth-glow 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Floating spark particle used sparingly as the signature element */
+.spark-particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: radial-gradient(circle, #F2C879 0%, #D89A2B 70%, transparent 100%);
+  animation: spark 3.5s ease-in infinite;
+}
+
+.glass {
+  background: rgba(248, 245, 240, 0.65);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+}
+
+.dark .glass {
+  background: rgba(46, 21, 9, 0.55);
+}
+
+.text-gradient-gold {
+  background: linear-gradient(120deg, #D89A2B, #F2C879);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Custom scrollbar, refined not default */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: #D89A2B;
+  border-radius: 9999px;
+  border: 2px solid #F8F5F0;
+}
