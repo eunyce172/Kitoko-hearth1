@@ -9,6 +9,20 @@ export const programmes: Programme[] = [
     duration: '12 weeks',
     level: 'Beginner \u2192 Intermediate',
     skills: ['HTML/CSS/JS', 'React', 'APIs', 'Deployment'],
+    overview: 'Students go from a blank text file to a full-stack app deployed on the real internet, learning by building a portfolio site, a small interactive app, and a group capstone project.',
+    outcomes: [
+      'Build and style responsive, accessible websites from scratch',
+      'Understand how the modern web works: requests, APIs, and databases',
+      'Ship a full-stack project to a live URL others can visit',
+      'Read and debug code confidently, including code you did not write',
+    ],
+    curriculum: [
+      { title: 'Foundations', description: 'HTML, CSS, and JavaScript fundamentals — the building blocks of every website.' },
+      { title: 'Interactivity', description: 'DOM manipulation, events, and building your first interactive mini-app.' },
+      { title: 'React & Components', description: 'Component-based thinking, state, and reusable UI.' },
+      { title: 'APIs & Data', description: 'Fetching and displaying real data, working with third-party APIs.' },
+      { title: 'Capstone & Deployment', description: 'Plan, build, and ship a full-stack group project to a live URL.' },
+    ],
   },
   {
     slug: 'mobile-app-development',
@@ -18,6 +32,20 @@ export const programmes: Programme[] = [
     duration: '12 weeks',
     level: 'Intermediate',
     skills: ['React Native', 'UI Patterns', 'App Store', 'Testing'],
+    overview: 'A hands-on path from a napkin sketch to a working, testable mobile app — covering the mobile-specific patterns, testing, and polish that separate a demo from something people would actually use.',
+    outcomes: [
+      'Design and build native-feeling mobile interfaces',
+      'Understand mobile-specific UX patterns and navigation',
+      'Test an app on real devices and fix real bugs',
+      'Prepare an app for app-store submission',
+    ],
+    curriculum: [
+      { title: 'Mobile UI Foundations', description: 'Navigation patterns, gestures, and mobile-first design thinking.' },
+      { title: 'React Native Basics', description: 'Components, styling, and state for mobile screens.' },
+      { title: 'Device Features', description: 'Camera, location, notifications, and other native capabilities.' },
+      { title: 'Testing on Real Devices', description: 'Debugging across device sizes and operating systems.' },
+      { title: 'Ship It', description: 'Prepare app store assets and submit a finished app for review.' },
+    ],
   },
   {
     slug: 'ui-ux-design',
@@ -27,6 +55,20 @@ export const programmes: Programme[] = [
     duration: '8 weeks',
     level: 'Beginner',
     skills: ['Figma', 'User Research', 'Prototyping', 'Design Systems'],
+    overview: 'Students learn the full design process — talking to real users, sketching, prototyping in Figma, and testing designs — culminating in a polished, presented case study.',
+    outcomes: [
+      'Conduct lightweight user research and synthesize findings',
+      'Wireframe and prototype in Figma at a professional level',
+      'Build and apply a small design system',
+      'Present and defend design decisions like a working designer',
+    ],
+    curriculum: [
+      { title: 'Research & Empathy', description: 'Interviewing users and turning findings into design problems worth solving.' },
+      { title: 'Wireframing', description: 'Low-fidelity sketches and structuring information before visual polish.' },
+      { title: 'Prototyping in Figma', description: 'Interactive, clickable prototypes ready for testing.' },
+      { title: 'Design Systems', description: 'Typography, color, and components that scale across a product.' },
+      { title: 'Usability Testing & Presentation', description: 'Testing with real users and presenting a polished case study.' },
+    ],
   },
   {
     slug: 'robotics',
@@ -36,6 +78,20 @@ export const programmes: Programme[] = [
     duration: '14 weeks',
     level: 'Intermediate',
     skills: ['Electronics', 'Arduino', 'Sensors', 'Automation'],
+    overview: 'Students wire circuits, program microcontrollers, and bring a physical robot to life — ending with a working machine that senses and responds to its environment.',
+    outcomes: [
+      'Read basic circuit diagrams and safely wire components',
+      'Program a microcontroller (Arduino) to control motors and sensors',
+      'Debug hardware issues, not just code',
+      'Design and build a working robot from scratch',
+    ],
+    curriculum: [
+      { title: 'Electronics Basics', description: 'Circuits, breadboards, and safely working with components.' },
+      { title: 'Programming the Arduino', description: 'Writing code that controls real hardware.' },
+      { title: 'Sensors & Feedback', description: 'Reading sensor data and reacting to the physical world.' },
+      { title: 'Motors & Movement', description: 'Controlling motion — wheels, arms, or grippers.' },
+      { title: 'Final Build', description: 'Design, wire, and program a complete working robot.' },
+    ],
   },
   {
     slug: 'ai-machine-learning',
@@ -45,6 +101,20 @@ export const programmes: Programme[] = [
     duration: '14 weeks',
     level: 'Advanced',
     skills: ['Python', 'ML Models', 'Data', 'Ethics in AI'],
+    overview: 'Students move past the AI hype to build real understanding — training models on real datasets, and thinking critically about bias, fairness, and responsible use.',
+    outcomes: [
+      'Write Python for data analysis and model training',
+      'Train, evaluate, and improve a machine learning model',
+      'Explain how a model reaches its predictions in plain language',
+      'Reason critically about bias and ethics in AI systems',
+    ],
+    curriculum: [
+      { title: 'Python & Data Foundations', description: 'Python fundamentals and working with real datasets.' },
+      { title: 'How Models Learn', description: 'Core ML concepts: training, testing, and evaluating a model.' },
+      { title: 'Building Models', description: 'Training classification and prediction models on real data.' },
+      { title: 'Ethics in AI', description: 'Bias, fairness, and the responsibility that comes with building AI.' },
+      { title: 'Applied Project', description: 'Build an intelligent application powered by your own trained model.' },
+    ],
   },
   {
     slug: 'digital-entrepreneurship',
@@ -54,6 +124,20 @@ export const programmes: Programme[] = [
     duration: '10 weeks',
     level: 'All Levels',
     skills: ['Business Models', 'Pitching', 'Marketing', 'Launch'],
+    overview: 'Students take a tech idea from napkin sketch to pitch-ready venture, learning the business fundamentals that turn a good idea into something real.',
+    outcomes: [
+      'Validate a business idea with real potential customers',
+      'Build a simple, defensible business model',
+      'Pitch an idea clearly and confidently to an audience',
+      'Launch a first version of a product or service',
+    ],
+    curriculum: [
+      { title: 'Idea Validation', description: 'Talking to potential customers before building anything.' },
+      { title: 'Business Models', description: 'How a venture actually makes money and sustains itself.' },
+      { title: 'Marketing Basics', description: 'Telling a compelling story and reaching an audience.' },
+      { title: 'Pitching', description: 'Structuring and delivering a pitch that lands.' },
+      { title: 'Launch', description: 'Getting a first version in front of real users.' },
+    ],
   },
   {
     slug: 'leadership-development',
@@ -63,6 +147,20 @@ export const programmes: Programme[] = [
     duration: '8 weeks',
     level: 'All Levels',
     skills: ['Communication', 'Teamwork', 'Mentorship', 'Public Speaking'],
+    overview: 'Runs alongside every technical programme — students practice the communication, collaboration, and leadership skills that turn technical ability into real impact.',
+    outcomes: [
+      'Communicate clearly in both technical and non-technical settings',
+      'Give and receive constructive feedback',
+      'Lead a small project team through disagreement and deadlines',
+      'Speak confidently in front of a group',
+    ],
+    curriculum: [
+      { title: 'Communication Foundations', description: 'Clear, confident communication in writing and speech.' },
+      { title: 'Working in Teams', description: 'Collaboration, conflict, and giving useful feedback.' },
+      { title: 'Mentorship', description: 'Learning to teach and support others as you grow.' },
+      { title: 'Public Speaking', description: 'Preparing and delivering a talk with confidence.' },
+      { title: 'Leading a Project', description: 'Applying it all: leading a small team through a real project.' },
+    ],
   },
 ];
 
