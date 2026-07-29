@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, FormEvent } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle2, Loader2, AlertCircle } from 'lucide-react';
 import { programmes } from '@/lib/data';
@@ -49,7 +50,10 @@ function validate(values: FormState): Errors {
 }
 
 export default function JoinForm() {
-  const [values, setValues] = useState<FormState>(initialState);
+  const searchParams = useSearchParams();
+  const prefillProgramme = programmes.find((p) => p.title === searchParams.get('programme'))?.title ?? '';
+
+  const [values, setValues] = useState<FormState>({ ...initialState, programme: prefillProgramme });
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<'idle' | 'submitting' | 'submitted'>('idle');
 
