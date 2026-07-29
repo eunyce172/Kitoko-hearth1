@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Plus_Jakarta_Sans, Inter } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
@@ -47,15 +47,21 @@ export const metadata: Metadata = {
     description:
       'Hands-on technology education for teenagers — web, mobile, AI, robotics, design, and entrepreneurship.',
     siteName: 'Kitoko Hearth',
-    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Kitoko Hearth' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Kitoko Hearth — Where Teens Build Tomorrow\'s Technology',
     description: 'Hands-on technology education for teenagers, powered by mentors and real projects.',
-    images: ['/og-image.jpg'],
   },
   robots: { index: true, follow: true },
+  manifest: '/manifest.webmanifest',
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#F8F5F0' },
+    { media: '(prefers-color-scheme: dark)', color: '#2E1509' },
+  ],
 };
 
 const jsonLd = {
@@ -65,7 +71,12 @@ const jsonLd = {
   url: siteUrl,
   description:
     'Kitoko Hearth empowers teenagers to discover, design, and build real technology through hands-on, project-based learning.',
-  sameAs: [],
+  sameAs: [
+    'https://linkedin.com',
+    'https://x.com',
+    'https://instagram.com',
+    'https://facebook.com',
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
