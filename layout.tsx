@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Plus_Jakarta_Sans, Inter } from 'next/font/google';
+import { MotionConfig } from 'framer-motion';
 import './globals.css';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
 import Navbar from '@/components/layout/Navbar';
@@ -32,6 +33,7 @@ export const metadata: Metadata = {
   },
   description:
     'Kitoko Hearth empowers teenagers to discover, design, and build real technology through hands-on, project-based learning in web development, AI, robotics, design, and more.',
+  alternates: { canonical: '/' },
   keywords: [
     'Kitoko Hearth',
     'teen technology education',
@@ -89,20 +91,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className={`${heading.variable} ${body.variable} font-body`}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
-          <PageLoader />
-          <a
-            href="#main-content"
-            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-gold focus:text-brown-deep focus:px-4 focus:py-2 focus:rounded-xl focus:shadow-lift"
-          >
-            Skip to main content
-          </a>
-          <ScrollProgress />
-          <Navbar />
-          <main id="main-content">{children}</main>
-          <Footer />
-          <ScrollToTop />
-        </ThemeProvider>
+        <MotionConfig reducedMotion="user">
+          <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+            <PageLoader />
+            <a
+              href="#main-content"
+              className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-gold focus:text-brown-deep focus:px-4 focus:py-2 focus:rounded-xl focus:shadow-lift"
+            >
+              Skip to main content
+            </a>
+            <ScrollProgress />
+            <Navbar />
+            <main id="main-content">{children}</main>
+            <Footer />
+            <ScrollToTop />
+          </ThemeProvider>
+        </MotionConfig>
       </body>
     </html>
   );
