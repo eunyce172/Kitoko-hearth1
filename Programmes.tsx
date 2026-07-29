@@ -27,7 +27,7 @@ export default function Programmes() {
             return (
               <Reveal key={programme.slug} delay={i * 0.06}>
                 <Link
-                  href="/programmes"
+                  href={`/programmes/${programme.slug}`}
                   className="group block h-full p-7 rounded-2xl bg-white dark:bg-brown border border-brown/5 dark:border-cream/5 shadow-soft hover:shadow-lift hover:-translate-y-1 transition-all duration-300"
                 >
                   <span className="flex items-center justify-center w-12 h-12 rounded-xl bg-gold-gradient mb-5 group-hover:scale-105 transition-transform">
