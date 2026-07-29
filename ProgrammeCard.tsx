@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ChevronDown, Clock, BarChart3, Code2 } from 'lucide-react';
+import Link from 'next/link';
+import { ChevronDown, Clock, BarChart3, Code2, ArrowRight } from 'lucide-react';
 import { Programme } from '@/types';
 import { iconMap } from '@/lib/icon-map';
 import Reveal from '@/components/ui/Reveal';
@@ -67,6 +68,14 @@ export default function ProgrammeCard({ programme, delay = 0 }: { programme: Pro
               </motion.div>
             )}
           </AnimatePresence>
+
+          <Link
+            href={`/programmes/${programme.slug}`}
+            className="mt-5 flex items-center gap-1.5 text-sm font-semibold text-brown dark:text-cream hover:text-gold transition-colors"
+          >
+            View full details
+            <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+          </Link>
         </div>
       </div>
     </Reveal>
