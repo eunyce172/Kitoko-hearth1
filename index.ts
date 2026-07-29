@@ -6,6 +6,9 @@ export interface Programme {
   duration: string;
   level: string;
   skills: string[];
+  overview: string;
+  outcomes: string[];
+  curriculum: { title: string; description: string }[];
 }
 
 export interface Testimonial {
