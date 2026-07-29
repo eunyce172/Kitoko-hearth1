@@ -2,7 +2,7 @@
 
 import { useState, FormEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle2, Loader2 } from 'lucide-react';
+import { CheckCircle2, Loader2, AlertCircle } from 'lucide-react';
 import { programmes } from '@/lib/data';
 
 interface FormState {
@@ -57,17 +57,34 @@ export default function JoinForm() {
     setValues((v) => ({ ...v, [key]: value }));
   }
 
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const validationErrors = validate(values);
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length > 0) return;
 
+    setSubmitError(null);
     setStatus('submitting');
-    // Placeholder submit — wire this to a real API route or form backend (e.g. your own
-    // /api/join endpoint, Formspree, or a spreadsheet integration) before launch.
-    await new Promise((resolve) => setTimeout(resolve, 900));
-    setStatus('submitted');
+
+    try {
+      const res = await fetch('/api/join', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        throw new Error(data?.error ?? 'Something went wrong. Please try again.');
+      }
+
+      setStatus('submitted');
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
+      setStatus('idle');
+    }
   }
 
   if (status === 'submitted') {
@@ -104,6 +121,21 @@ export default function JoinForm() {
 
   return (
     <form onSubmit={handleSubmit} noValidate className="space-y-6" aria-label="Kitoko Hearth registration form">
+      <AnimatePresence>
+        {submitError && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            role="alert"
+            className="flex items-start gap-2 text-sm text-red-600 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900 rounded-xl px-4 py-3"
+          >
+            <AlertCircle className="w-4 h-4 mt-0.5 shrink-0" aria-hidden="true" />
+            {submitError}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <div className="grid sm:grid-cols-2 gap-6">
         <Field label="Full Name" htmlFor="fullName" error={errors.fullName}>
           <input
