@@ -1,110 +1,90 @@
 import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
-import { Clock, BarChart3, CheckCircle2 } from 'lucide-react';
 import PageHero from '@/components/ui/PageHero';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import Reveal from '@/components/ui/Reveal';
-import Button from '@/components/ui/Button';
-import { programmes } from '@/lib/data';
+import { coreValues, storyMilestones } from '@/lib/data';
+import { iconMap } from '@/lib/icon-map';
+import { Sparkles } from 'lucide-react';
 
-interface Props {
-  params: { slug: string };
-}
+export const metadata: Metadata = {
+  alternates: { canonical: '/about' },
+  title: 'About Us',
+  description: 'The story, vision, mission, and values behind Kitoko Hearth — why we exist and who we serve.',
+};
 
-export function generateStaticParams() {
-  return programmes.map((p) => ({ slug: p.slug }));
-}
-
-export function generateMetadata({ params }: Props): Metadata {
-  const programme = programmes.find((p) => p.slug === params.slug);
-  if (!programme) return {};
-  return {
-    title: programme.title,
-    description: programme.description,
-  };
-}
-
-export default function ProgrammeDetailPage({ params }: Props) {
-  const programme = programmes.find((p) => p.slug === params.slug);
-  if (!programme) notFound();
-
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Course',
-    name: programme.title,
-    description: programme.description,
-    provider: {
-      '@type': 'Organization',
-      name: 'Kitoko Hearth',
-      sameAs: 'https://kitokohearth.org',
-    },
-  };
-
+export default function AboutPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <Breadcrumbs items={[{ label: 'Programmes', href: '/programmes' }, { label: programme.title }]} />
-      <PageHero eyebrow={`${programme.duration} \u00b7 ${programme.level}`} title={programme.title} description={programme.overview} />
+      <Breadcrumbs items={[{ label: 'About' }]} />
+      <PageHero
+        eyebrow="About Kitoko Hearth"
+        title="A hearth is where things are built, together."
+        description="We exist because too many teenagers with real technical curiosity never get a real project to point it at."
+      />
 
-      <section className="py-16 md:py-20 bg-cream dark:bg-brown-deep">
-        <div className="max-w-4xl mx-auto px-6 grid md:grid-cols-2 gap-10">
+      {/* Vision & Mission */}
+      <section className="py-20 md:py-28 bg-white dark:bg-brown">
+        <div className="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-10">
           <Reveal>
-            <div className="p-8 rounded-2xl bg-white dark:bg-brown shadow-soft h-full">
-              <h2 className="font-display font-semibold text-xl text-brown dark:text-cream mb-5">
-                What you&rsquo;ll walk away with
-              </h2>
-              <ul className="space-y-3">
-                {programme.outcomes.map((outcome) => (
-                  <li key={outcome} className="flex items-start gap-2.5 text-sm text-charcoal/70 dark:text-cream/70 leading-relaxed">
-                    <CheckCircle2 className="w-4 h-4 text-gold mt-0.5 shrink-0" aria-hidden="true" />
-                    {outcome}
-                  </li>
-                ))}
-              </ul>
+            <div className="p-8 rounded-2xl bg-cream dark:bg-brown-deep shadow-soft h-full">
+              <h2 className="font-display font-bold text-2xl text-brown dark:text-cream mb-3">Our Vision</h2>
+              <p className="text-charcoal/70 dark:text-cream/70 leading-relaxed">
+                A generation of young people who see themselves as builders of technology, not just users of it —
+                equipped, mentored, and given the room to create.
+              </p>
             </div>
           </Reveal>
-
           <Reveal delay={0.08}>
-            <div className="p-8 rounded-2xl bg-white dark:bg-brown shadow-soft h-full">
-              <h2 className="font-display font-semibold text-xl text-brown dark:text-cream mb-5">At a glance</h2>
-              <ul className="space-y-4 text-sm">
-                <li className="flex items-center gap-2.5 text-charcoal/70 dark:text-cream/70">
-                  <Clock className="w-4 h-4 text-gold shrink-0" aria-hidden="true" />
-                  <span><strong className="text-brown dark:text-cream">Duration:</strong> {programme.duration}</span>
-                </li>
-                <li className="flex items-center gap-2.5 text-charcoal/70 dark:text-cream/70">
-                  <BarChart3 className="w-4 h-4 text-gold shrink-0" aria-hidden="true" />
-                  <span><strong className="text-brown dark:text-cream">Level:</strong> {programme.level}</span>
-                </li>
-              </ul>
-              <h3 className="font-display font-semibold text-sm text-brown dark:text-cream mt-6 mb-3">Skills covered</h3>
-              <ul className="flex flex-wrap gap-2">
-                {programme.skills.map((skill) => (
-                  <li key={skill} className="text-xs font-medium px-3 py-1.5 rounded-full bg-cream dark:bg-brown-deep text-brown dark:text-cream border border-brown/10 dark:border-cream/10">
-                    {skill}
-                  </li>
-                ))}
-              </ul>
+            <div className="p-8 rounded-2xl bg-cream dark:bg-brown-deep shadow-soft h-full">
+              <h2 className="font-display font-bold text-2xl text-brown dark:text-cream mb-3">Our Mission</h2>
+              <p className="text-charcoal/70 dark:text-cream/70 leading-relaxed">
+                To give teenagers hands-on, project-based technology education — led by real mentors, measured by
+                things actually shipped, not just lessons completed.
+              </p>
             </div>
           </Reveal>
         </div>
       </section>
 
-      <section className="py-16 md:py-20 bg-white dark:bg-brown">
+      {/* Why we exist */}
+      <section className="py-20 md:py-28 bg-cream dark:bg-brown-deep">
+        <div className="max-w-3xl mx-auto px-6 text-center">
+          <Reveal>
+            <Sparkles className="w-8 h-8 text-gold mx-auto mb-6" aria-hidden="true" />
+            <h2 className="font-display font-bold text-3xl md:text-4xl text-brown dark:text-cream mb-5 text-balance">
+              Why Kitoko Hearth exists
+            </h2>
+            <p className="text-charcoal/70 dark:text-cream/70 leading-relaxed text-lg">
+              Most teenagers who are curious about technology hit the same wall: tutorials with no mentor, ambition
+              with no project, and talent with no path. Kitoko Hearth closes that gap — pairing every teen with a
+              mentor and a real problem worth solving, so curiosity becomes a portfolio, not just a phase.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Story timeline - sequential, so numbered/ordered markers are appropriate here */}
+      <section className="py-20 md:py-28 bg-white dark:bg-brown">
         <div className="max-w-3xl mx-auto px-6">
-          <Reveal className="text-center mb-12">
-            <p className="font-display text-sm font-semibold uppercase tracking-wider text-gold mb-3">Curriculum</p>
-            <h2 className="font-display font-bold text-3xl text-brown dark:text-cream">How the programme unfolds</h2>
+          <Reveal className="text-center mb-16">
+            <p className="font-display text-sm font-semibold uppercase tracking-wider text-gold mb-3">Our Story</p>
+            <h2 className="font-display font-bold text-3xl md:text-4xl text-brown dark:text-cream">
+              How the hearth was built
+            </h2>
           </Reveal>
 
           <ol className="relative border-l-2 border-gold/30 ml-3">
-            {programme.curriculum.map((module, i) => (
-              <Reveal key={module.title} delay={i * 0.06} className="mb-9 last:mb-0">
+            {storyMilestones.map((milestone, i) => (
+              <Reveal key={milestone.year} delay={i * 0.06} className="mb-10 last:mb-0">
                 <li className="pl-8 relative">
-                  <span className="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-gold-gradient ring-4 ring-cream dark:ring-brown-deep" aria-hidden="true" />
-                  <p className="font-display font-bold text-gold text-xs uppercase tracking-wider mb-1">Module {i + 1}</p>
-                  <h3 className="font-display font-semibold text-lg text-brown dark:text-cream mb-1">{module.title}</h3>
-                  <p className="text-sm text-charcoal/65 dark:text-cream/65 leading-relaxed">{module.description}</p>
+                  <span className="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-gold-gradient ring-4 ring-white dark:ring-brown" aria-hidden="true" />
+                  <p className="font-display font-bold text-gold text-sm mb-1">{milestone.year}</p>
+                  <h3 className="font-display font-semibold text-lg text-brown dark:text-cream mb-1">
+                    {milestone.title}
+                  </h3>
+                  <p className="text-sm text-charcoal/65 dark:text-cream/65 leading-relaxed">
+                    {milestone.description}
+                  </p>
                 </li>
               </Reveal>
             ))}
@@ -112,21 +92,36 @@ export default function ProgrammeDetailPage({ params }: Props) {
         </div>
       </section>
 
-      <section className="py-20 bg-hearth-gradient">
-        <div className="max-w-xl mx-auto px-6 text-center">
-          <Reveal>
-            <h2 className="font-display font-bold text-2xl md:text-3xl text-cream mb-4">
-              Ready to start {programme.title}?
+      {/* Core values */}
+      <section className="py-20 md:py-28 bg-cream dark:bg-brown-deep">
+        <div className="max-w-6xl mx-auto px-6">
+          <Reveal className="text-center max-w-2xl mx-auto mb-14">
+            <p className="font-display text-sm font-semibold uppercase tracking-wider text-gold mb-3">Core Values</p>
+            <h2 className="font-display font-bold text-3xl md:text-4xl text-brown dark:text-cream">
+              What guides how we teach
             </h2>
-            <Button
-              href={`/join?programme=${encodeURIComponent(programme.title)}`}
-              size="lg"
-              icon
-              className="bg-none bg-cream text-brown-deep shadow-none hover:shadow-glow"
-            >
-              Apply for This Programme
-            </Button>
           </Reveal>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {coreValues.map((value, i) => {
+              const Icon = iconMap[value.icon] ?? Sparkles;
+              return (
+                <Reveal key={value.title} delay={i * 0.06}>
+                  <div className="p-7 rounded-2xl bg-white dark:bg-brown shadow-soft h-full">
+                    <span className="flex items-center justify-center w-11 h-11 rounded-xl bg-gold-gradient mb-4">
+                      <Icon className="w-5 h-5 text-brown-deep" aria-hidden="true" />
+                    </span>
+                    <h3 className="font-display font-semibold text-lg text-brown dark:text-cream mb-2">
+                      {value.title}
+                    </h3>
+                    <p className="text-sm text-charcoal/65 dark:text-cream/65 leading-relaxed">
+                      {value.description}
+                    </p>
+                  </div>
+                </Reveal>
+              );
+            })}
+          </div>
         </div>
       </section>
     </>
