@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import PageHero from '@/components/ui/PageHero';
+import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import TestimonialCard from '@/components/testimonials/TestimonialCard';
 import Button from '@/components/ui/Button';
 import Reveal from '@/components/ui/Reveal';
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
 export default function TestimonialsPage() {
   return (
     <>
+      <Breadcrumbs items={[{ label: "Testimonials" }]} />
       <PageHero
         eyebrow="Testimonials"
         title="Stories from our community"
