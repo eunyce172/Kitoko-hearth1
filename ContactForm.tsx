@@ -2,7 +2,7 @@
 
 import { useState, FormEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle2, Loader2 } from 'lucide-react';
+import { CheckCircle2, Loader2, AlertCircle } from 'lucide-react';
 
 interface FormState {
   name: string;
@@ -30,16 +30,34 @@ export default function ContactForm() {
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<'idle' | 'submitting' | 'submitted'>('idle');
 
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const validationErrors = validate(values);
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length > 0) return;
 
+    setSubmitError(null);
     setStatus('submitting');
-    // Placeholder submit — connect to a real API route or form backend before launch.
-    await new Promise((resolve) => setTimeout(resolve, 800));
-    setStatus('submitted');
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        throw new Error(data?.error ?? 'Something went wrong. Please try again.');
+      }
+
+      setStatus('submitted');
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
+      setStatus('idle');
+    }
   }
 
   if (status === 'submitted') {
@@ -61,6 +79,21 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} noValidate className="space-y-5" aria-label="Contact form">
+      <AnimatePresence>
+        {submitError && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            role="alert"
+            className="flex items-start gap-2 text-sm text-red-600 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900 rounded-xl px-4 py-3"
+          >
+            <AlertCircle className="w-4 h-4 mt-0.5 shrink-0" aria-hidden="true" />
+            {submitError}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <div>
         <label htmlFor="contact-name" className="block text-sm font-semibold text-brown dark:text-cream mb-2">
           Full Name
