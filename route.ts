@@ -1,13 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-interface JoinPayload {
-  fullName: string;
+interface ContactPayload {
+  name: string;
   email: string;
-  phone: string;
-  age: string;
-  school: string;
-  programme: string;
-  reason: string;
+  message: string;
+  websiteUrl?: string; // honeypot — real users never fill this in
 }
 
 function isValidEmail(email: string) {
@@ -15,7 +12,7 @@ function isValidEmail(email: string) {
 }
 
 export async function POST(request: NextRequest) {
-  let body: Partial<JoinPayload>;
+  let body: Partial<ContactPayload>;
 
   try {
     body = await request.json();
@@ -23,9 +20,14 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Invalid request body.' }, { status: 400 });
   }
 
-  const { fullName, email, phone, age, school, programme, reason } = body;
+  // Honeypot triggered — likely a bot. Respond as if successful without processing.
+  if (body.websiteUrl) {
+    return NextResponse.json({ ok: true, message: 'Message received.' }, { status: 200 });
+  }
 
-  if (!fullName?.trim() || !email?.trim() || !phone?.trim() || !age || !school?.trim() || !programme || !reason?.trim()) {
+  const { name, email, message } = body;
+
+  if (!name?.trim() || !email?.trim() || !message?.trim()) {
     return NextResponse.json({ error: 'All fields are required.' }, { status: 400 });
   }
 
@@ -33,27 +35,10 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Enter a valid email address.' }, { status: 400 });
   }
 
-  const ageNum = Number(age);
-  if (Number.isNaN(ageNum) || ageNum < 10 || ageNum > 19) {
-    return NextResponse.json({ error: 'Programmes are designed for ages 10\u201319.' }, { status: 400 });
-  }
+  // TODO before launch: forward this to a real inbox or ticketing tool.
+  // Same options as app/api/join/route.ts (Resend/Postmark email, database, or CRM).
 
-  // TODO before launch: persist the application and notify the team. Common options:
-  //  - Send a notification email (e.g. Resend, Postmark, or Nodemailer + SMTP)
-  //  - Save to a database (e.g. Supabase, Postgres via Prisma) or a Google Sheet
-  //  - Forward to a CRM / mailing list (e.g. Mailchimp, Airtable)
-  // Example with Resend (npm install resend, set RESEND_API_KEY in .env.local):
-  //
-  //   import { Resend } from 'resend';
-  //   const resend = new Resend(process.env.RESEND_API_KEY);
-  //   await resend.emails.send({
-  //     from: 'Kitoko Hearth <applications@kitokohearth.org>',
-  //     to: 'team@kitokohearth.org',
-  //     subject: `New application: ${fullName} — ${programme}`,
-  //     text: `${fullName} (${email}, ${phone}) — age ${age}, ${school}\n\nProgramme: ${programme}\n\n${reason}`,
-  //   });
+  console.log('New Kitoko Hearth contact message received:', { name, email });
 
-  console.log('New Kitoko Hearth application received:', { fullName, email, programme });
-
-  return NextResponse.json({ ok: true, message: 'Application received.' }, { status: 200 });
+  return NextResponse.json({ ok: true, message: 'Message received.' }, { status: 200 });
 }
